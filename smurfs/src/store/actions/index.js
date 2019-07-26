@@ -12,6 +12,10 @@ export const DELETE_DATA_START = 'DELETE_DATA_START'
 export const DELETE_DATA_SUCCESS = 'DELETE_DATA_SUCCESS'
 export const DELETE_DATA_FAILURE = 'DELETE_DATA_FAILURE'
 
+export const EDIT_DATA_START = 'EDIT_DATA_START'
+export const EDIT_DATA_SUCCESS = 'EDIT_DATA_SUCCESS'
+export const EDIT_DATA_FAILURE = 'EDIT_DATA_FAILURE'
+
 
 export const fetchData = () => dispatch => {
     dispatch({ type: FETCH_DATA_START})
@@ -42,6 +46,17 @@ export const deleteData = (id) => dispatch => {
         .then(response => {
             console.log(response)
             dispatch({ type: ADD_DATA_SUCCESS, payload: response.data})
+        })
+        .catch(err => console.log(err.response))
+    }
+
+export const editData = (id, editSmurf) => dispatch => {
+    dispatch({ type: EDIT_DATA_START})
+    axios
+        .put(`http://localhost:3333/smurfs/${id}`, editSmurf)
+        .then(response => {
+            console.log(response)
+            dispatch({ type: EDIT_DATA_SUCCESS, payload: response.data})
         })
         .catch(err => console.log(err.response))
     }

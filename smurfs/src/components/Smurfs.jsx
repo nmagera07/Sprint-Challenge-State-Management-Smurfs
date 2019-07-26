@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import { Form, Card, Image, Button } from 'semantic-ui-react'
-import { fetchData, addData, deleteData } from '../store/actions'
+import { Form, Card, Image, Button, Modal } from 'semantic-ui-react'
+import { fetchData, addData, deleteData, editData } from '../store/actions'
 
 const Smurfs = (props) => {
     const [input, setInput] = useState({
@@ -41,6 +41,18 @@ const Smurfs = (props) => {
         
     }
 
+    const editSmurf = e => {
+        e.preventDefault()
+        props.editData(input.smurfs)
+        setInput({
+            smurfs: {
+                name: '',
+                age: '',
+                height: '',
+                image: ''
+            }
+        })
+    }
     
 
     if (props.isFetching) {
@@ -60,7 +72,48 @@ const Smurfs = (props) => {
                             <p>Age: {smurf.age}</p>
                             <p>Height: {smurf.height}</p>
                         </Card.Description>
-                    <Button onClick={() => props.deleteData(smurf.id)}>Delete</Button>
+                    <Modal trigger={<Button >Edit Smurf</Button>}>
+                        <Form >
+                            <Form.Field width="4">
+                                <input
+                                placeholder="name"
+                                type="text"
+                                name="name"
+                                onChange={handleChanges}
+                                value={input.smurfs.name}
+                            />
+                            </Form.Field>
+                            <Form.Field width="4">
+                                <input
+                                placeholder="age"
+                                type="text"
+                                name="age"
+                                onChange={handleChanges}
+                                value={input.smurfs.age}
+                            />
+                            </Form.Field>
+                            <Form.Field width="4">
+                                <input
+                                placeholder="height"
+                                type="text"
+                                name="height"
+                                onChange={handleChanges}
+                                value={input.smurfs.height}
+                            /> 
+                            </Form.Field>
+                            <Form.Field width="4">
+                                <input
+                                placeholder="image url"
+                                type="text"
+                                name="image"
+                                onChange={handleChanges}
+                                value={input.smurfs.image}
+                            /> 
+                            </Form.Field>
+                            <Button onClick={editSmurf}>Submit</Button>
+                            </Form>
+                    </Modal>
+                    <Button onClick={() => props.deleteData(smurf.id)}>Delete Smurf</Button>
                     </Card.Content>
                 </Card>
             })}
@@ -123,5 +176,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchData, addData, deleteData }
+    { fetchData, addData, deleteData, editData }
 )(Smurfs)

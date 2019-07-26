@@ -7,7 +7,10 @@ import {
     ADD_DATA_FAILURE,
     DELETE_DATA_START,
     DELETE_DATA_SUCCESS,
-    DELETE_DATA_FAILURE,DELETE
+    DELETE_DATA_FAILURE,
+    EDIT_DATA_START,
+    EDIT_DATA_SUCCESS,
+    EDIT_DATA_FAILURE,
 } from '../actions'
 
 
@@ -76,6 +79,28 @@ export const reducer = (state = initialState, action) => {
                 smurfs: action.payload
             }
         case DELETE_DATA_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+                isFetching: false,
+                smurfs: []
+            }
+        case EDIT_DATA_START:
+            return {
+                ...state,
+                error: '',
+                isFetching: true,
+                smurfs: []
+            }
+        case EDIT_DATA_SUCCESS:
+            const newSmurfData = state.smurfs.filter(smurf => smurf.id !== action.payload.id)
+            return {
+                ...state,
+                error: '',
+                isFetching: false,
+                smurfs: [...newSmurfData, action.payload]
+            }
+        case EDIT_DATA_FAILURE:
             return {
                 ...state,
                 error: action.payload,
