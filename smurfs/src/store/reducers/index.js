@@ -5,6 +5,9 @@ import {
     ADD_DATA_START,
     ADD_DATA_SUCCESS,
     ADD_DATA_FAILURE,
+    DELETE_DATA_START,
+    DELETE_DATA_SUCCESS,
+    DELETE_DATA_FAILURE,DELETE
 } from '../actions'
 
 
@@ -52,6 +55,27 @@ export const reducer = (state = initialState, action) => {
                 smurfs: action.payload
             }
         case ADD_DATA_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+                isFetching: false,
+                smurfs: []
+            }
+        case DELETE_DATA_START:
+            return {
+                ...state,
+                error: '',
+                isFetching: true,
+                smurfs: []
+            }
+        case DELETE_DATA_SUCCESS:
+            return {
+                ...state,
+                error: '',
+                isFetching: false,
+                smurfs: action.payload
+            }
+        case DELETE_DATA_FAILURE:
             return {
                 ...state,
                 error: action.payload,

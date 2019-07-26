@@ -60,3 +60,8 @@ form {
   margin: 0 auto;
   border-radius: 10px;
 }
+
+img {
+  width: 300px;
+  height: 300px;
+}

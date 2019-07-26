@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import { Form, Card, Image } from 'semantic-ui-react'
-import { fetchData, addData } from '../store/actions'
+import { Form, Card, Image, Button } from 'semantic-ui-react'
+import { fetchData, addData, deleteData } from '../store/actions'
 
 const Smurfs = (props) => {
     const [input, setInput] = useState({
@@ -47,13 +47,12 @@ const Smurfs = (props) => {
        return <h2>Loading...</h2>
     }
 
-    console.log(input.smurfs.name)
-    console.log(input.smurfs.age)
+    console.log("props", props.smurfs)
     return (
         <div >
             <div className="smurfs">
-            {props.smurfs.map(smurf => {
-                return <Card >
+            {props.smurfs.map((smurf, i) => {
+                return <Card key={i}>
                     <Image src={smurf.image} alt='smurf'></Image>
                     <Card.Content>
                         <Card.Header><p>{smurf.name}</p></Card.Header>
@@ -61,6 +60,7 @@ const Smurfs = (props) => {
                             <p>Age: {smurf.age}</p>
                             <p>Height: {smurf.height}</p>
                         </Card.Description>
+                    <Button onClick={() => props.deleteData(smurf.id)}>Delete</Button>
                     </Card.Content>
                 </Card>
             })}
@@ -123,5 +123,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchData, addData }
+    { fetchData, addData, deleteData }
 )(Smurfs)
