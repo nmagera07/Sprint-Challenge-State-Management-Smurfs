@@ -1,0 +1,62 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+nav {
+  height: 75px;
+  background-color: #62cdfd;
+}
+
+.smurfs {
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: wrap;
+
+}
+
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+
+
+
+
+.form-background {
+  background-color: #62cdfd;
+  width: 30%;
+  height: 300px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
